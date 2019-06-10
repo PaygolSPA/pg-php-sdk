@@ -4,7 +4,6 @@ namespace Paygol;
 
 use Paygol\Exceptions\InvalidParameterException;
 
-
 class Webcheckout extends Paygol
 {
     public function __construct($service_id, $shared_secret)
@@ -21,7 +20,7 @@ class Webcheckout extends Paygol
     public function createPayment()
     {
         $args = [
-            'pg_currency' => null,
+            'pg_currency' => $this->pg_currency,
             'pg_price' => $this->pg_price,
             'pg_country' => $this->pg_country,
             'pg_language' => $this->pg_language,
@@ -29,6 +28,10 @@ class Webcheckout extends Paygol
         ];
 
         $args = array_merge($args, $this->payer, $this->redirect_urls);
+
+        if ($this->pg_method != null) {
+            $args['pg_method'] = $this->pg_method;
+        }
 
         if ($this->pg_sub_merchant_id != null) {
             $args['pg_sub_merchant_id'] = $this->pg_sub_merchant_id;
@@ -57,7 +60,7 @@ class Webcheckout extends Paygol
 
         self::expect_vars($ret, ["data"]);
 
-        header( 'Location: ' . $ret['data']['redirectUrl'] );
+        header('Location: ' . $ret['data']['redirectUrl']);
         exit();
     }
 }
