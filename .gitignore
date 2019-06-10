@@ -1,3 +1,4 @@
 vendor/
 composer.lock
 private_files/
+index.php

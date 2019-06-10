@@ -226,7 +226,7 @@ abstract class Paygol
             'pg_email' => null,
         ];
 
-        $args = array_merge($args, $this->payer);
+        $args = array_merge($args, $this->payer, $this->redirect_urls);
 
         if ($this->pg_sub_merchant_id != null) {
             $args['pg_sub_merchant_id'] = $this->pg_sub_merchant_id;
@@ -238,14 +238,6 @@ abstract class Paygol
 
         if ($this->pg_custom != null) {
             $args['pg_custom'] = $this->pg_custom;
-        }
-
-        if ($this->pg_return_url != null) {
-            $args['pg_return_url'] = $this->pg_return_url;
-        }
-
-        if ($this->pg_cancel_url != null) {
-            $args['pg_cancel_url'] = $this->pg_cancel_url;
         }
 
         foreach ($args as $k => $v) {
