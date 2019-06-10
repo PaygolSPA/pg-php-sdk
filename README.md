@@ -1,4 +1,4 @@
-# PHP SDK for Paygol API and Webcheckout implementation
+# PHP SDK for API and Webcheckout implementation
 
 ## Installation
 
