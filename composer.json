@@ -1,0 +1,25 @@
+{
+  "name": "paygol/php-sdk",
+  "description": "PHP SDK for Paygol API and Webcheckout implementation",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Paygol SPA",
+      "email": "info@paygol.com"
+    }
+  ],
+  "support": {
+    "email": "tech@paygol.com",
+    "source": "https://github.com/PaygolSPA/php-sdk",
+    "docs": "https://devs.paygol.com"
+  },
+  "require": {
+    "php": ">=5.6.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Paygol\\": "lib/php-apiv2"
+    }
+  }
+}
