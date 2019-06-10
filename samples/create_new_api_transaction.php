@@ -14,7 +14,10 @@ try {
     $pg = new API($service_id, $shared_secret);
 
     $redirectUrls = new RedirectUrls();
-    $redirectUrls->setRedirects("https://www.my-site.com/success", "https://www.my-site.com/failure"); // optional
+    $redirectUrls->setRedirects(
+        "https://www.my-site.com/success", 
+        "https://www.my-site.com/failure"
+    ); // optional
 
     $pg->setRedirects($redirectUrls);
 
@@ -32,7 +35,12 @@ try {
 
     $payment = $pg->createPayment();
 
-    var_dump( $payment['data']['payment_method_url'] );
+    var_dump( $payment );
+
+    if (!empty($payment['data']['payment_method_url'])) {
+        // do something
+    }
+    
 } catch (InvalidParameterException $e) {
     die($e->getMessage());
 } catch (\Exception $e) {

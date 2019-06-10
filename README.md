@@ -25,9 +25,9 @@ $service_id = "123";
 $shared_secret = "7c1a6a24-7943-102d-92f8-29573711ad31";
 
 try {
-    $pg = new API($service_id, $shared_secret);
+    $pg = new \Paygol\API($service_id, $shared_secret);
 
-    $redirectUrls = new RedirectUrls();
+    $redirectUrls = new \Paygol\Models\RedirectUrls();
     $redirectUrls->setRedirects(
       "https://www.my-site.com/success", 
       "https://www.my-site.com/failure"
@@ -39,7 +39,7 @@ try {
     $pg->setPrice(10.00, 'EUR');
     $pg->setPaymentMethod('bitcoin');
 
-    $payer = new Payer();
+    $payer = new \Paygol\Models\Payer();
     $payer->setFirstName('John');
     $payer->setLastName('Doe');
     $payer->setEmail('jdoe@my-site.com');
@@ -49,7 +49,11 @@ try {
 
     $payment = $pg->createPayment();
 
-    var_dump( $payment['data']['payment_method_url'] );
+    var_dump( $payment );
+
+    if (!empty($payment['data']['payment_method_url'])) {
+        // do something
+    }
 } catch (\Exception $e) {
     die($e->getMessage());
 }

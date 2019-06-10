@@ -14,7 +14,10 @@ try {
     $pg = new Webcheckout($service_id, $shared_secret);
 
     $redirectUrls = new RedirectUrls();
-    $redirectUrls->setRedirects("https://www.my-site.com/success", "https://www.my-site.com/failure"); // optional
+    $redirectUrls->setRedirects(
+        "https://www.my-site.com/success", 
+        "https://www.my-site.com/failure"
+    ); // optional
 
     $pg->setRedirects($redirectUrls);
 
