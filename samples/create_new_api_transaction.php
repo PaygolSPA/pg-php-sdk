@@ -7,7 +7,17 @@ use \Paygol\Models\RedirectUrls;
 use \Paygol\Exceptions\InvalidParameterException;
 
 
+/**
+ * Merchant service ID
+ *
+ * @var int
+ */
 $service_id = "123";
+/**
+ * Merchant shared secret
+ *
+ * @var string
+ */
 $shared_secret = "7c1a6a24-7943-102d-92f8-29573711ad31";
 
 try {
@@ -24,6 +34,7 @@ try {
     $pg->setCountry('DE');
     $pg->setPrice(100, 'EUR');
     $pg->setPaymentMethod('bitcoin');
+    $pg->setName('Payment From Paygol');
 
     $payer = new Payer();
     $payer->setFirstName('John');
