@@ -1,5 +1,9 @@
 <?php
 
+namespace Paygol;
+
+use Paygol\Exceptions\InvalidSignatureException;
+
 class Notification
 {
     const API_IMPL = "php/1.0";
@@ -63,8 +67,8 @@ class Notification
      */
     public function validate()
     {
-        if (empty($this->headers['X-Pg-Sig']) || $this->headers['X-Pg-Sig'] !== $this->compute_signature()) {
-            throw new \Exception('Invalid signature');
+        if (empty($this->headers[self::API_SIGN_HEADER]) || $this->headers[self::API_SIGN_HEADER] !== $this->compute_signature()) {
+            throw new InvalidSignatureException('Invalid signature');
         }
 
         return true;
