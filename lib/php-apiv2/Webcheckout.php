@@ -45,6 +45,10 @@ class Webcheckout extends Paygol
             $args['pg_custom'] = $this->pg_custom;
         }
 
+        if ($this->pg_name != null) {
+            $args['pg_name'] = $this->pg_name;
+        }
+
         foreach ($args as $k => $v) {
             if (null == $v) {
                 throw new InvalidParameterException("Parameter {$k} is requiered");

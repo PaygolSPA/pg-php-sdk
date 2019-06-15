@@ -41,11 +41,11 @@ abstract class Paygol
      */
     protected $service_id;
 
-    /**
-     * Merchant shared secret
-     *
-     * @var string
-     */
+/**
+ * Merchant shared secret
+ *
+ * @var string
+ */
     protected $shared_secret;
 
     /**
@@ -116,6 +116,11 @@ abstract class Paygol
     protected $pg_custom = null;
 
     /**
+     * @var mixed
+     */
+    protected $pg_name = null;
+
+    /**
      * Success return URL
      *
      * @var string
@@ -175,6 +180,16 @@ abstract class Paygol
     }
 
     /**
+     * @param string $name
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->pg_name = $name;
+    }
+
+    /**
      * Get payment methods
      *
      * @param string $country
@@ -185,7 +200,8 @@ abstract class Paygol
     {
         $ret = $this->get(self::API_PATH_PAYMENT_METHODS, ['pg_country' => strtoupper($country)]);
         self::expect_vars($ret, ["methods"]);
-        return $ret["methods"];
+
+        return $this->format_response($ret);
     }
 
     /**
@@ -238,6 +254,10 @@ abstract class Paygol
 
         if ($this->pg_custom != null) {
             $args['pg_custom'] = $this->pg_custom;
+        }
+
+        if ($this->pg_name != null) {
+            $args['pg_name'] = $this->pg_name;
         }
 
         foreach ($args as $k => $v) {
