@@ -91,6 +91,11 @@ class Payer extends Model
         $this->pg_phone = $phone;
     }
 
+    public function setPersonalID($pid)
+    {
+        $this->pg_personalid = $pid;
+    }
+    
     public function setIBAN($iban)
     {
         $this->pg_iban = $iban;
